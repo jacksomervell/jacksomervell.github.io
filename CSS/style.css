@@ -1,0 +1,28 @@
+body {
+  display: block;
+  background: black;
+  margin-top: 20px;
+
+}
+
+#container {
+  background-image: url(../Images/HauntedBackground1.jpg);
+  background-size: 110%;
+  display: block;
+  margin: 0 auto;
+  width: 600px;
+  height: 400px;
+  border: black;
+  border-width: 50px;
+  border-color: red;
+}
+
+.ghost {
+  display: inline-block;
+  width: 10%;
+}
+
+.yoshi {
+  display: inline-block;
+  width: 20%;
+}
