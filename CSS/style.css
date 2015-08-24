@@ -29,15 +29,15 @@ body {
 .ghostTwo {
   position: absolute;
   width: 10%;
-  right: -400px;
-  top: 0px;
+  right: -95px;
+  top: 100px;
   bottom: 0px;
 }
 
-.ghostThree {
+.kingBoo {
   position: absolute;
-  width: 10%;
-  left: -50px;
+  width: 20%;
+  left: -200px;
   top: 0px;
   bottom: 0px;
 
@@ -45,7 +45,7 @@ body {
 .yoshi {
   position: absolute;
   width: 20%;
-  right: -500px;
+  right: -200px;
   bottom: 0px;
   top: 0px;
 }
