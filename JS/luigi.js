@@ -13,56 +13,63 @@ $(document).ready(function(){
   $('#container').css( 'cursor', 'url(../project1/Images/LPMicon.png), auto' );
 //make sure thos ghosts keep on coming:
 // function ghostsComing(){
-//   $('#container').prepend('<img class = "ghost" src = "../project1/Images/Boo1flipped.png" />');
+//   var img = $('<img>');
+//   img.attr('src', "../project1/Images/Boo1flipped.png");
+//   img.attr('class', 'ghost');
+//   img.css('top', Math.random() * 100);
+//   console.log(img)
+//   $('#container').prepend(img);
 //   floatGhost();
-//   }
+// }
 
-// var addGhosts = setInterval(ghostsComing, 5000 - (currentScore * 100)); 
+// var addGhosts = setInterval(ghostsComing, 1000 - (currentScore * 100)); 
 
  //adding event listeners to the objects:
   //this one animates the ghost from the left to die:
-    ghostImage.on('click',function(){
-      ghostImage.attr('src',"../project1/Images/Boo2.png");
-      clearInterval(moveTheGhost);
-      currentScore = currentScore + 1;
-      $("h1").text("Score: " + currentScore); //this updates the score
-      console.log(currentScore);
-      ghostImage.animate({
-        opacity: 0,
-        top: "+=200",
-      }, 500, function() {
-      $('.ghostImage').removeAttr('style');
-    }); 
-  });
+            ghostImage.on('click',function(){
+              ghostImage.attr('src',"../project1/Images/Boo2.png");
+              clearInterval(moveTheGhost);
+              currentScore = currentScore + 1;
+              $("h1").text("Score: " + currentScore); //this updates the score
+              console.log(currentScore);
+              ghostImage.animate({
+                opacity: 0,
+                top: "+=200",
+              }, 2000, function() {
+              ghostImage.css({'left' : -100, 'top': (Math.random() *200), opacity: 1,})
+              ghostImage.attr('src',"../project1/Images/Boo1flipped.png");
+              moveTheGhost = setInterval(floatGhost, 10);
+              });
+              
+            });
 
 //ghost from the right to die:
-ghostImageTwo.on('click',function(){
-      ghostImageTwo.attr('src',"../project1/Images/Boo2.png");
-      clearInterval(moveTheGhost);
-      currentScore = currentScore + 1;
-      $("h1").text("Score: " + currentScore); //this updates the score
-      console.log(currentScore);
-      ghostImageTwo.animate({
-        opacity: 0,
-        top: "+=400",
-      }, 2000, function() {
-    }); 
-      ghostImage.css({'left' : -100, 'top': (Math.random() *200)});
-      moveTheGhost();
-  });
-    //this one makes the yoshis die:
-    yoshiImage.hover (function(){
-      yoshiImage.attr('src', "../project1/Images/deadYoshi.gif")
-      clearInterval(moveYoshi);
-      currentScore = currentScore - 1;
-      $("h1").text("Score: " + currentScore); //this updates the score
-      yoshiImage.css("width", "10%");
-      console.log(currentScore);
-      yoshiImage.animate({
-        opacity: 0,
-        bottom: "+=400",
-      }, 3000, function() {
-        
+          ghostImageTwo.on('click',function(){
+                ghostImageTwo.attr('src',"../project1/Images/Boo2.png");
+                clearInterval(moveGhostTwo);
+                currentScore = currentScore + 2;
+                $("h1").text("Score: " + currentScore); //this updates the score
+                console.log(currentScore);
+                ghostImageTwo.animate({
+                  opacity: 0,
+                  top: "+=400",
+                }, 2000, function() {
+
+              }); 
+            });
+            //this one makes the yoshis die:
+            yoshiImage.hover (function(){
+                yoshiImage.attr('src', "../project1/Images/deadYoshi.gif")
+                clearInterval(moveYoshi);
+                currentScore = currentScore - 1;
+                $("h1").text("Score: " + currentScore); //this updates the score
+                yoshiImage.css("width", "10%");
+                console.log(currentScore);
+                yoshiImage.animate({
+                  opacity: 0,
+                  bottom: "+=400",
+              }, 3000, function() {
+                
         }); 
     })
 
@@ -77,13 +84,9 @@ ghostImageTwo.on('click',function(){
 //making the first ghost move:
 
   function floatGhost(){
-
+    var ghostImage = $(".ghost");
     var currentLeft = parseInt(ghostImage.css('left'));
-    var currentRight = parseInt(ghostImage.css('right'));
     var currentTop = parseFloat(ghostImage.css('top'));
-    var currentBottom = parseInt(ghostImage.css('bottom'));
-      // console.log(currentLeft);
-      // console.log(currentTop);
       var newLeft = currentLeft + 1;
       var newTop = currentTop + 1; 
       ghostImage.css({'left': newLeft, 'top': newTop});
@@ -104,12 +107,25 @@ ghostImageTwo.on('click',function(){
         ghostImage.css({'top': upFloat})
         }
         
-        //this bit stops the ghost:
+        //this bit stops the ghost and resets him:
       if (currentLeft > 550){
             ghostImage.css({'left' : -100, 'top': (Math.random() *200)});
               } 
-            // ghostImage.css({'display': 'none'})
+          
         }
+
+//move the second ghost
+
+ function floatGhostTwo(){
+
+    var currentRight = parseFloat(ghostImageTwo.css('right'));
+    var currentTop = parseFloat(ghostImageTwo.css('top'));
+      var newRight = currentRight + 1 + currentScore; 
+      ghostImageTwo.css({'right': newRight});
+      if (currentRight > 600){
+            ghostImageTwo.css({'right' : -400, 'top': (Math.random() *300)});
+              } 
+    }
     
 //making yoshi move and stop in the same way:
 
@@ -122,14 +138,15 @@ ghostImageTwo.on('click',function(){
       // console.log(currentTop);
       var newRight = currentRight + 1; 
       yoshiImage.css({'right': newRight});
-      if (currentRight > 30){
-            clearInterval(moveYoshi);
-            // yoshiImage.css({'display': 'none'});
+      if (currentRight > 600){
+          yoshiImage.css({'right' : -400, 'top': (Math.random() *300)});
       }
     }  
 
+
  var moveTheGhost = setInterval(floatGhost, 10);
- var moveYoshi = setInterval(floatYoshi, 25);
+ var moveYoshi = setInterval(floatYoshi, 5);
+ var moveGhostTwo = setInterval(floatGhostTwo, 10);
 
 
 

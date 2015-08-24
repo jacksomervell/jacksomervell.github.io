@@ -7,18 +7,17 @@ body {
 }
 
 #container {
-  position: absolute;
+  position: relative;
   background-image: url(../Images/HauntedBackground1.jpg);
   background-size: 110%;
   margin: 0 auto;
   width: 600px;
   height: 400px;
-  left: 300px;
   overflow: hidden;
 }
 
 .ghost {
-  position: relative;
+  position: absolute;
   width: 10%;
   left: -50px;
   right: 10px;
@@ -28,15 +27,15 @@ body {
 }
 
 .ghostTwo {
-  position: relative;
+  position: absolute;
   width: 10%;
-  right: -500px;
+  right: -400px;
   top: 0px;
   bottom: 0px;
 }
 
 .ghostThree {
-  position: relative;
+  position: absolute;
   width: 10%;
   left: -50px;
   top: 0px;
@@ -44,7 +43,7 @@ body {
 
 }
 .yoshi {
-  position: relative;
+  position: absolute;
   width: 20%;
   right: -500px;
   bottom: 0px;
@@ -56,11 +55,7 @@ body {
   margin-left: 900px;
 }
 
-.mushroom {
-  position: relative;
-  width: 10%;
-  left: -50px;
-}
+
 
 h1 {
   color: white;
