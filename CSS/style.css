@@ -78,6 +78,7 @@ body {
   /*display: inline-block;*/
   margin: 0 auto;
   width: 600px;
+  color: white;
   font-family: 'Creepster', cursive;
   display: none;
   
@@ -129,6 +130,44 @@ body {
   border: 0px;
   font-family: 'Creepster', cursive;
   font-size: 30px;
+}
+
+.game-over{
+  background-image: url(../Images/GameOver.gif);
+  background-size: 100%;
+  margin: 0 auto;
+  width: 600px;
+  height: 400px;
+}
+
+.vacuum{
+  width: 40%;
+  padding-left: 170px;
+  margin-top: -10px;
+}
+
+.gameover-writing{
+  display: block;
+  margin: 0 auto;
+  padding-left: 170px;
+  padding-top: 100px;
+  font-family: 'Creepster', cursive;
+  text-shadow: 2px 2px 5px #000;
+  font-size: 80px;
+  color: red;
+  border: black;
+}
+
+.play-again{
+  display: block;
+  margin: 0 auto;
+  background: none;
+  border: 0px;
+  color: green;
+  text-shadow: 2px 2px 2px #000;
+  font-family: 'Creepster', cursive;
+  font-size: 30px;
+
 }
 
 h1 {

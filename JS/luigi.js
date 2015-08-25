@@ -1,8 +1,4 @@
-
-
-$(document).ready(function(){
-
-  //global vairable:
+//global vairables:
     var currentScore = 0
     var ghostImage = $(".ghost") 
     var ghostImageTwo = $(".ghostTwo")
@@ -14,29 +10,49 @@ $(document).ready(function(){
     var lastGhost = $(".ghostThree")
     var topBoo = $(".ghostCeiling")
     var kingScore = 9
+    var moveTheGhost
+    var moveYoshi 
+    var moveGhostTwo 
+    var moveKing 
+    var moveRight 
+    var moveLastGhost 
+    var moveTopBoo 
+
+
+$(document).ready(function(){
+
+  
 
   //these variables start the timers to play the game:
   function playGame(){
-    var moveTheGhost = setInterval(floatGhost, 10);
-    var moveYoshi = setInterval(floatYoshi, 30);
-    var moveGhostTwo = setInterval(floatGhostTwo, 50);
-    var moveKing = setInterval(floatKing, 10000);
-    var moveRight = setInterval(floatRightGhost, 10);
-    var moveLastGhost = setInterval(floatLastGhost, 10);
-    var moveTopBoo = setInterval(floatTopBoo, 20);
+    moveTheGhost = setInterval(floatGhost, 10);
+    moveYoshi = setInterval(floatYoshi, 30);
+    moveGhostTwo = setInterval(floatGhostTwo, 50);
+    moveKing = setInterval(floatKing, 10000);
+    moveRight = setInterval(floatRightGhost, 10);
+    moveLastGhost = setInterval(floatLastGhost, 10);
+    moveTopBoo = setInterval(floatTopBoo, 20);
 
  $('#container').css( 'cursor', 'url(../project1/Images/LuigiFlip.png), auto');
 
   $("#container").mousedown(function(event){
     event.preventDefault();})
-  
-    }
+  }
 
+  function gameOver(){
+    
+  }
 
+  //starts the game when player clicks the button:
     $(".start-button").click(function(){
         console.log("hello");
-        $(".score").css({"display" : "inline-block"})
-    }
+        $(".score").css({"display" : "block"});
+        $(".startscreen").slideUp("slow");
+        setTimeout(playGame, 2000);
+    })
+
+    $(".start-button").css( 'cursor', 'url(../project1/Images/booTalk.gif), auto')
+
 
 })
 // playGame()
@@ -431,5 +447,4 @@ function kingBooKill (){
    
   console.log(ghostsEscaped)
 
-});
 
