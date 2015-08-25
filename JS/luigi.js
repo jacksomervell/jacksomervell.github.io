@@ -9,26 +9,84 @@ $(document).ready(function(){
   var currentTop = parseFloat(ghostImage.css('top'));
   var yoshiImage = $(".yoshi")
   var kingBoo = $(".kingBoo")
+  var rightGhost = $(".ghostRight")
   var ghostsEscaped = 0
+  var lastGhost = $(".ghostThree")
+  var topBoo = $(".ghostCeiling")
+  var kingScore = 0
 
-// this turns the cursor to Luigi:
-  $('#container').css( 'cursor', 'url(../project1/Images/LuigiFlip.png), auto' );
-//make sure thos ghosts keep on coming:
-// function ghostsComing(){
-//   var img = $('<img>');
-//   img.attr('src', "../project1/Images/Boo1flipped.png");
-//   img.attr('class', 'ghost');
-//   img.css('top', Math.random() * 100);
-//   console.log(img)
-//   $('#container').prepend(img);
-//   floatGhost();
-// }
 
-// var addGhosts = setInterval(ghostsComing, 1000 - (currentScore * 100)); 
+  var moveTheGhost = setInterval(floatGhost, 10);
+  var moveYoshi = setInterval(floatYoshi, 30);
+  var moveGhostTwo = setInterval(floatGhostTwo, 50);
+  var moveKing = setInterval(floatKing, 10000);
+  var moveRight = setInterval(floatRightGhost, 10);
+  var moveLastGhost = setInterval(floatLastGhost, 10);
+  var moveTopBoo = setInterval(floatTopBoo, 20);
 
+// this turns the cursor to Luigi and changes on-click
+  $('#container').css( 'cursor', 'url(../project1/Images/LuigiFlip.png), auto');
+
+
+  yoshiHover();
+  ghostTwoDie();
+  lastGhostDie();
+  ghostImageDie();
+  rightGhostDie();
+  topBooDie();
+  kingBooKill();
+
+
+//   $('#container').on('mousedown', function(event){
+//     $('#container').css('cursor', 'url(../project1/Images/LuigiFlip.png), auto')
+//   });
+
+// $('#container').on('mouseup', function(){
+//     $('#container').css('cursor', 'url(../project1/Images/LuigiFlip.png), auto')
+//   });
+ 
+
+ 
  //adding event listeners to the objects:
-  //this one animates the ghost from the left to die:
-            ghostImage.click (function(){
+
+ //this one animated the ceiling ghost:
+
+function topBooDie() {
+            topBoo.one('click', function(){
+              currentScore = currentScore + 3
+              $("h1").text("Score: " + currentScore); //this updates the score
+              console.log(currentScore);
+              topBoo.slideUp(200, function(){
+                  topBoo.css({"top": -100, "left" : (Math.random() *200), "display": 'inline-block' })
+                  moveTopBoo = setInterval(floatTopBoo, 40000)
+                  topBooDie()
+              })
+            });
+  }
+            
+  //this one animates the ghost from the right to die:
+  function rightGhostDie() {
+            rightGhost.one('click', function(){
+              rightGhost.attr('src',"../project1/Images/Boo2.png");
+              clearInterval(moveRight);
+              currentScore = currentScore + 1;
+              $("h1").text("Score: " + currentScore); //this updates the score
+              console.log(currentScore);
+              rightGhost.animate({
+                    opacity: 0,
+                    top: "+=100",
+              }, 2000, function() {
+                    rightGhost.css({'right' : -100, 'top': (Math.random() *200), opacity: 1,})
+                    rightGhost.attr('src',"../project1/Images/Boo1.png");
+                    moveRight = setInterval(floatRightGhost, 10);
+                    rightGhostDie()
+                    });
+              });
+    }
+
+  //this one animated the ghost form the left to die:
+  function ghostImageDie() {
+            ghostImage.one('click', function(){
               ghostImage.attr('src',"../project1/Images/Boo2.png");
               clearInterval(moveTheGhost);
               currentScore = currentScore + 1;
@@ -41,12 +99,35 @@ $(document).ready(function(){
                     ghostImage.css({'left' : -100, 'top': (Math.random() *200), opacity: 1,})
                     ghostImage.attr('src',"../project1/Images/Boo1flipped.png");
                     moveTheGhost = setInterval(floatGhost, 10);
+                    ghostImageDie()
               });
               
             });
+  }
 
-//ghost from the right to die:
-          ghostImageTwo.click (function(){
+//this one animates the top-left ghost to die:
+function lastGhostDie() {
+          lastGhost.one('click', function(){
+              lastGhost.attr('src',"../project1/Images/Boo2.png");
+              clearInterval(moveLastGhost);
+              currentScore = currentScore + 1;
+              $("h1").text("Score: " + currentScore); //this updates the score
+              console.log(currentScore);
+              lastGhost.animate({
+                    opacity: 0,
+                    top: "+=200",
+              }, 2000, function() {
+                    lastGhost.css({'left' : -100, 'top': (Math.random() *200), opacity: 1,})
+                    lastGhost.attr('src',"../project1/Images/Boo1flipped.png");
+                    moveLastGhost = setInterval(floatLastGhost, 10);
+                    lastGhostDie()
+              });
+              
+            });
+  }      
+//cumulating ghost to die:
+function ghostTwoDie() {
+          ghostImageTwo.one('click', function(){
                 ghostImageTwo.attr('src',"../project1/Images/blackboo.gif");
                 clearInterval(moveGhostTwo);
                 currentScore = currentScore + 2;
@@ -57,33 +138,92 @@ $(document).ready(function(){
                 }, 2000, function() {
                     ghostImageTwo.css({'right' : -400, 'top': (Math.random() *200), opacity: 1,})
                     ghostImageTwo.attr('src',"../project1/Images/Boogif1.gif")
-                    moveGhostTwo = setInterval(floatGhostTwo, 10);
+                    moveGhostTwo = setInterval(floatGhostTwo, 50 - (currentScore*2))
+                    ghostTwoDie();
                 }); 
             });
-            //this one makes the yoshis die:
-            yoshiImage.hover (function(){
-                yoshiImage.attr('src', "../project1/Images/deadYoshi.gif")
-                clearInterval(moveYoshi);
-                currentScore = currentScore - 1;
-                $("h1").text("Score: " + currentScore); //this updates the score
-                yoshiImage.css("width", "10%");
-                console.log(currentScore);
-                yoshiImage.animate({
-                  opacity: 0,
-              }, 3000, function() {
-                    yoshiImage.css({right: -500, 'top' : (Math.random() *200), opacity: 1})
-                    yoshiImage.attr('src', "../project1/Images/Yoshi_fly.gif")
-                    yoshiImage.css("width", "20%");
-                    moveYoshi = setInterval(floatYoshi, 20);
-        }); 
-    })
+}
+//this one makes the yoshis die:
+function yoshiHover() {
+   yoshiImage.one('mouseover', function(){
+    console.log('mouseover')
+    yoshiImage.attr('src', "../project1/Images/deadYoshi.gif")
+    clearInterval(moveYoshi);
+    currentScore = currentScore - 1;
+    $("h1").text("Score: " + currentScore); //this updates the score
+    yoshiImage.css("width", "10%");
+    console.log(currentScore);
 
-//making images appear randomly at different heights:
+    yoshiImage.animate({
+      opacity: 0,
+    }, 3000, function() {
+      yoshiImage.css({right: -200, 'top' : (Math.random() *200), opacity: 1})
+      yoshiImage.attr('src', "../project1/Images/Yoshi_fly.gif")
+      yoshiImage.css("width", "20%");
+      moveYoshi = setInterval(floatYoshi, 30);
+      yoshiHover();
+    });
+  })
+}
+           
 
-        // var heightArray = [1, 2, 3]
-        // var startTop = heightArray[Math.floor(Math.random()*heightArray.length)];
-        // var startTop = (startTop * 100);
-       
+function kingBooKill (){
+  kingBoo.one('click', function(){
+    clearInterval(moveKing);
+    kingScore = kingScore + 1;
+    kingBoo.attr('src', "../project1/Images/ShyKing.gif");
+    kingBoo.animate({
+      opacity: 0,
+    }, 2000, function(){
+        kingBoo.attr('src', "../project1/Images/KingBoo1.gif")
+        kingBoo.css({left: -200, opacity: 0})
+        var moveKing = setInterval(floatKing, 10000);
+        kingBooKill()         
+        }
+    );
+  })
+}
+
+// function KingBooKill (){
+//   kingBoo.one('click', function(){
+//       var KingLuck = Math.random()
+//       clearInterval(floatKing)
+//         if (KingLuck > 0.1){
+//             kingBoo.attr('src', "../project1/Images/ShyKing.gif")
+//             currentScore = currentScore - 1;
+//             kingBoo.animate({
+//               opacity: 0,
+//               }, 4000, function() {
+//                 kingBoo.attr('src', "../project1/Images/KingBoo1.gif")
+//                 kingBoo.css({opacity: 1})
+//                 moveKing = setInterval(floatKing, 15000)
+//                 KingBooKill();
+//               })
+//           }
+//         else { 
+//           currentScore = currentScore + 10;
+//           kingBoo.attr('src', "../project1/Images/StarSpin.gif");
+//           kingBoo.animate({
+//             opacity: 0,
+//             }, 8000, function() {
+//               kingBoo.attr('src', "../project1/Images/KingBoo1.gif")
+//               kingBoo.css({opacity: 1})
+//               moveKing = setInterval(floatKing, 15000)
+//               KingBooKill();
+
+//             })
+//         }
+//     })
+// }
+
+      
+
+                  
+                  
+
+
+              
+
 
 
 //making the first ghost move:
@@ -115,11 +255,83 @@ $(document).ready(function(){
         //this bit stops the ghost and resets him:
       if (currentLeft > 550){
             ghostImage.css({'left' : -100, 'top': (Math.random() *200)});
+            ghostsEscaped = ghostsEscaped + 1;
+            console.log(ghostsEscaped)
               } 
           
         }
 
-//move the second ghost
+//float the right-hand-side ghost:
+function floatRightGhost(){
+    var rightGhost = $(".ghostRight")
+    var currentRight = parseInt(rightGhost.css('right'));
+    var currentTop = parseFloat(rightGhost.css('top'));
+      var newRight = currentRight + 1;
+      var newTop = currentTop + 1; 
+      rightGhost.css({'right': newRight, 'top': newTop});
+
+  //this bit determines the up and down floatyness of the ghost rather than just a straight line:
+      if (currentRight > 100 && currentRight < 200){
+        var upFloat = currentTop - 1;
+        rightGhost.css({'top': upFloat})
+        }
+       
+       if (currentRight > 300 && currentRight < 400){
+        var upFloat = currentTop - 1;
+        rightGhost.css({'top': upFloat})
+        }
+
+         if (currentRight > 500 && currentRight < 600){
+        var upFloat = currentTop - 1;
+        rightGhost.css({'top': upFloat})
+        }
+        
+        //this bit stops the ghost and resets him:
+      if (currentRight> 550){
+            rightGhost.css({'right' : -50, 'top': (Math.random() *200)});
+            ghostsEscaped = ghostsEscaped + 1;
+            console.log(ghostsEscaped);
+              } 
+          
+        }
+
+//move the top left ghost
+function floatLastGhost(){
+    var lastGhost = $(".ghostThree");
+    var currentLeft = parseInt(lastGhost.css('left'));
+    var currentTop = parseFloat(lastGhost.css('top'));
+      var newLeft = currentLeft + 1;
+      var newTop = currentTop + 1; 
+      lastGhost.css({'left': newLeft, 'top': newTop});
+
+  //this bit determines the up and down floatyness of the ghost rather than just a straight line:
+      if (currentLeft > 100 && currentLeft < 200){
+        var upFloat = currentTop - 1;
+        lastGhost.css({'top': upFloat})
+        }
+       
+       if (currentLeft > 300 && currentLeft < 400){
+        var upFloat = currentTop - 1;
+        lastGhost.css({'top': upFloat})
+        }
+
+         if (currentLeft > 500 && currentLeft < 600){
+        var upFloat = currentTop - 1;
+        lastGhost.css({'top': upFloat})
+        }
+        
+        //this bit stops the ghost and resets him:
+      if (currentLeft > 550){
+            lastGhost.css({'left' : -100, 'top': (Math.random() *200)});
+            ghostsEscaped = ghostsEscaped + 1;
+            console.log(ghostsEscaped)
+              } 
+          
+        }
+
+
+
+//move the first cumulating ghost
 
  function floatGhostTwo(){
 
@@ -128,7 +340,9 @@ $(document).ready(function(){
       var newRight = currentRight + 1; 
       ghostImageTwo.css({'right': newRight});
       if (currentRight > 600){
-            ghostImageTwo.css({'right' : -400, 'top': (Math.random() *300)});
+            ghostImageTwo.css({'right' : -400, 'top': (Math.random() *300)})
+            ghostsEscaped = ghostsEscaped + 1;
+            console.log(ghostsEscaped);
               } 
     }
     
@@ -145,24 +359,44 @@ $(document).ready(function(){
       }
     }  
 
+//this determines the king's random appearances
     function floatKing(){
-      kingBoo.css({'left' : (Math.random() * 300)})
-      kingBoo.css({'top' : (Math.random() * 300)})
-      kingBoo.css({'opacity' : 0})
-      kingBoo.animate({
-                  opacity: 1
-                  }, 7000, function(){
-                    kingBoo.css({'left' : (Math.random() * 300)})
-                    kingBoo.css({'top' : (Math.random() * 300)})
-                    kingBoo.css({'opacity' : 0})  
-                    }
-                  
-                ); 
-            };
+      // if (kingBoo.css({'left' : -200}) === true){
+        kingBoo.css({'left' : (Math.random() * 300)});
+        kingBoo.css({'top' : (Math.random() * 300)});
+        kingBoo.fadeTo( 3000 , 1, function() {});
+        kingBoo.fadeTo( 3000, 0, function(){});
 
- var moveTheGhost = setInterval(floatGhost, 10);
- var moveYoshi = setInterval(floatYoshi, 100);
- var moveGhostTwo = setInterval(floatGhostTwo, 100 + Math.abs(currentScore));
- var moveKing = setInterval(floatKing, 15000);
+      }
+        // kingBoo.animate({
+        //     opacity: 1
+        //     }, 10000, function(){
+        //       kingBoo.css({'left' : (Math.random() * 300)})
+        //       kingBoo.css({'top' : (Math.random() * 300)})
+        //       kingBoo.css({'opacity' : 0})  
+        //       }        
+        //   ); 
+        // };
+      
 
+function floatTopBoo(){
+  if (currentScore > 30) {
+    var topBoo = $(".ghostCeiling")
+    var currentTop = parseFloat(topBoo.css('top'));
+    var newTop = currentTop + 1; 
+    topBoo.css({'top': newTop});
+
+    if (currentTop > 400){
+      topBoo.css({'top' : -500, 'left': (Math.random() *300)})
+      ghostsEscaped = ghostsEscaped + 1;
+      console.log(ghostsEscaped);
+    } 
+  }
+}
+
+
+
+ 
+
+console.log(ghostsEscaped)
 });

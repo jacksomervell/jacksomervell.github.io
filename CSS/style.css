@@ -29,9 +29,23 @@ body {
 .ghostTwo {
   position: absolute;
   width: 10%;
-  right: -95px;
+  right: -600px;
   top: 100px;
   bottom: 0px;
+}
+
+.ghostRight {
+  position: absolute;
+  width: 10%;
+  right: -300px;
+  top: 150px;
+}
+
+.ghostCeiling {
+  position: absolute;
+  top: -100px;
+  left: 200px;
+  right: 0px;
 }
 
 .kingBoo {
@@ -40,6 +54,7 @@ body {
   left: -200px;
   top: 0px;
   bottom: 0px;
+  opacity: 0;
 
 }
 .yoshi {
@@ -48,6 +63,15 @@ body {
   right: -200px;
   bottom: 0px;
   top: 0px;
+}
+
+.ghostThree {
+  position: absolute;
+  width: 10%;
+  left: -700px;
+  right: 10px;
+  top: 0px;
+  bottom: 60px;
 }
 
 .score {
