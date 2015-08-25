@@ -22,26 +22,46 @@
 $(document).ready(function(){
 
   
-
   //these variables start the timers to play the game:
   function playGame(){
     moveTheGhost = setInterval(floatGhost, 10);
     moveYoshi = setInterval(floatYoshi, 30);
     moveGhostTwo = setInterval(floatGhostTwo, 50);
-    moveKing = setInterval(floatKing, 10000);
+    moveKing = setInterval(floatKing, 30000);
     moveRight = setInterval(floatRightGhost, 10);
     moveLastGhost = setInterval(floatLastGhost, 10);
     moveTopBoo = setInterval(floatTopBoo, 20);
 
- $('#container').css( 'cursor', 'url(../project1/Images/LuigiFlip.png), auto');
+//this sets the cursor to Luigi while the game is playing and prevents it from changing
+    $('#container').css( 'cursor', 'url(../project1/Images/LuigiFlip.png), auto');
 
-  $("#container").mousedown(function(event){
+    $("#container").mousedown(function(event){
     event.preventDefault();})
   }
 
-  function gameOver(){
-    
-  }
+//this sets the cursor to a glove on the start and game over screens, and a ghost when hovering over the play and estart buttons:
+
+    $("body").css('cursor', 'url(../project1/Images/cursorglove.png), auto')
+        $("body").mousedown(function(event){
+        event.preventDefault();})
+
+    $(".startscreen").css('cursor', 'url(../project1/Images/cursorglove.png), auto')
+        $(".startscreen").mousedown(function(event){
+        event.preventDefault();})
+
+    $(".game-over").css('cursor', 'url(../project1/Images/cursorglove.png), auto')
+        $(".game-over").mousedown(function(event){
+        event.preventDefault();})
+
+    $(".play-again").css( 'cursor', 'url(../project1/Images/booTalk.gif), auto')
+        $(".play-again").mousedown(function(event){
+        event.preventDefault();})
+
+
+    $(".start-button").css( 'cursor', 'url(../project1/Images/booTalk.gif), auto')
+        $(".start-button").mousedown(function(event){
+        event.preventDefault();})
+          
 
   //starts the game when player clicks the button:
     $(".start-button").click(function(){
@@ -51,35 +71,55 @@ $(document).ready(function(){
         setTimeout(playGame, 2000);
     })
 
-    $(".start-button").css( 'cursor', 'url(../project1/Images/booTalk.gif), auto')
 
-
+    $(".play-again").click(function(){
+        console.log('hello')
+        $('.game-over').slideUp("slow");
+        currentScore = 0
+        ghostsEscaped = 0
+        playGame()
+        ghostImage.css({'display': 'inline-block'}) 
+        ghostImageTwo.css({'display': 'inline-block'}) 
+        yoshiImage.css({'display': 'inline-block'}) 
+        kingBoo.css({'display': 'inline-block'})
+        rightGhost.css({'display': 'inline-block'}) 
+        lastGhost.css({'display': 'inline-block'}) 
+        topBoo.css({'display': 'inline-block'}) 
+      })
 })
-// playGame()
-
-// this turns the cursor to Luigi and changes on-click
- 
 
 
-
+//calling all the functions
   yoshiHover();
   ghostTwoDie();
   lastGhostDie();
   ghostImageDie();
   rightGhostDie();
   topBooDie();
-  kingBooKill();
+  // kingBooKill(); commenting out for presentation becuase causing too many problems
+  gameOver();
 
+//this determines if it's game over and is called after every ghost animate function
+function gameOver(){
+    if (ghostsEscaped > 9){
+      $('.game-over').slideDown("slow");
+      clearInterval(moveTheGhost)
+      clearInterval(moveYoshi) 
+      clearInterval(moveGhostTwo) 
+      clearInterval(moveKing) 
+      clearInterval(moveRight) 
+      clearInterval(moveLastGhost) 
+      clearInterval(moveTopBoo)
 
-//   $('#container').on('mousedown', function(event){
-//     $('#container').css('cursor', 'url(../project1/Images/LuigiFlip.png), auto')
-//   });
-
-// $('#container').on('mouseup', function(){
-//     $('#container').css('cursor', 'url(../project1/Images/LuigiFlip.png), auto')
-//   });
- 
-
+      ghostImage.css({'display': 'none'}) 
+      ghostImageTwo.css({'display': 'none'}) 
+      yoshiImage.css({'display': 'none'}) 
+      kingBoo.css({'display': 'none'})
+      rightGhost.css({'display': 'none'}) 
+      lastGhost.css({'display': 'none'}) 
+      topBoo.css({'display': 'none'}) 
+      }
+    }
  
  //adding event listeners to the objects:
 
@@ -199,24 +239,24 @@ function yoshiHover() {
 }
              
 
-function kingBooKill (){
-  kingBoo.one('click', function(){
-    clearInterval(moveKing);
-    kingScore = kingScore + 1;
-    kingSpecial()
-    console.log(kingScore)
-    kingBoo.attr('src', "../project1/Images/ShyKing.gif");
-    kingBoo.animate({
-      opacity: 0,
-      }, 2000, function(){
-        kingBoo.attr('src', "../project1/Images/KingBoo1.gif")
-        kingBoo.css({left: -200, opacity: 0})
-        var moveKing = setInterval(floatKing, 20000);
-        kingBooKill()         
-        });
+// function kingBooKill (){
+//   kingBoo.one('click', function(){
+//     clearInterval(moveKing);
+//     kingScore = kingScore + 1;
+//     kingSpecial()
+//     console.log(kingScore)
+//     kingBoo.attr('src', "../project1/Images/ShyKing.gif");
+//     kingBoo.animate({
+//       opacity: 0,
+//       }, 2000, function(){
+//         kingBoo.attr('src', "../project1/Images/KingBoo1.gif")
+//         kingBoo.css({left: -200, opacity: 0})
+//         var moveKing = setInterval(floatKing, 20000);
+//         kingBooKill()         
+//         });
     
-  })
-}
+//   })
+// }
 
 
 // function KingBooKill (){
@@ -265,13 +305,13 @@ function kingBooKill (){
 
   //making the first ghost move:
 
-    function floatGhost(){
-      var ghostImage = $(".ghost");
-      var currentLeft = parseInt(ghostImage.css('left'));
-      var currentTop = parseFloat(ghostImage.css('top'));
-        var newLeft = currentLeft + 1;
-        var newTop = currentTop + 1; 
-        ghostImage.css({'left': newLeft, 'top': newTop});
+function floatGhost(){
+    var ghostImage = $(".ghost");
+    var currentLeft = parseInt(ghostImage.css('left'));
+    var currentTop = parseFloat(ghostImage.css('top'));
+    var newLeft = currentLeft + 1;
+    var newTop = currentTop + 1; 
+    ghostImage.css({'left': newLeft, 'top': newTop});
 
     //this bit determines the up and down floatyness of the ghost rather than just a straight line:
         if (currentLeft > 100 && currentLeft < 200){
@@ -294,9 +334,8 @@ function kingBooKill (){
               ghostImage.css({'left' : -100, 'top': (Math.random() *200)});
               ghostsEscaped = ghostsEscaped + 1;
               $("h2").html('Ghosts escaped: ' + '<span class ="green-text">' + ghostsEscaped +  '/10' + '</span>'); //this updates the ghosts escaped score
-
-               
               console.log(ghostsEscaped)
+              gameOver()
                 } 
             
           }
@@ -332,6 +371,7 @@ function kingBooKill (){
               ghostsEscaped = ghostsEscaped + 1;
               $("h2").html('Ghosts escaped: ' + '<span class ="green-text">' + ghostsEscaped +  '/10' + '</span>'); 
               console.log(ghostsEscaped);
+              gameOver()
                 } 
             
           }
@@ -367,6 +407,7 @@ function kingBooKill (){
               ghostsEscaped = ghostsEscaped + 1;
               $("h2").html('Ghosts escaped: ' + '<span class ="green-text">' + ghostsEscaped +  '/10' + '</span>'); 
               console.log(ghostsEscaped)
+              gameOver()
                 } 
             
           }
@@ -386,6 +427,7 @@ function kingBooKill (){
               ghostsEscaped = ghostsEscaped + 1;
               $("h2").html('Ghosts escaped: ' + '<span class ="green-text">' + ghostsEscaped +  '/10' + '</span>'); 
               console.log(ghostsEscaped);
+              gameOver()
                 } 
       }
       
@@ -434,6 +476,7 @@ function kingBooKill (){
         ghostsEscaped = ghostsEscaped + 1;
         $("h2").html('Ghosts escaped: ' + '<span class ="green-text">' + ghostsEscaped +  '/10' + '</span>'); 
         console.log(ghostsEscaped);
+        gameOver()
       } 
     }
   }
