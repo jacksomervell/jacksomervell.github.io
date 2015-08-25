@@ -13,7 +13,7 @@ $(document).ready(function(){
   var ghostsEscaped = 0
   var lastGhost = $(".ghostThree")
   var topBoo = $(".ghostCeiling")
-  var kingScore = 0
+  var kingScore = 9
 
 
   var moveTheGhost = setInterval(floatGhost, 10);
@@ -26,6 +26,9 @@ $(document).ready(function(){
 
 // this turns the cursor to Luigi and changes on-click
   $('#container').css( 'cursor', 'url(../project1/Images/LuigiFlip.png), auto');
+
+  $("#container").mousedown(function(event){
+    event.preventDefault();})
 
 
   yoshiHover();
@@ -54,7 +57,7 @@ $(document).ready(function(){
 function topBooDie() {
             topBoo.one('click', function(){
               currentScore = currentScore + 3
-              $("h1").text("Score: " + currentScore); //this updates the score
+              $("h1").html('Score: ' + '<span class ="red-text">' + currentScore + '</span>')
               console.log(currentScore);
               topBoo.slideUp(200, function(){
                   topBoo.css({"top": -100, "left" : (Math.random() *200), "display": 'inline-block' })
@@ -70,13 +73,13 @@ function topBooDie() {
               rightGhost.attr('src',"../project1/Images/Boo2.png");
               clearInterval(moveRight);
               currentScore = currentScore + 1;
-              $("h1").text("Score: " + currentScore); //this updates the score
+              $("h1").html('Score: ' + '<span class ="red-text">' + currentScore + '</span>'); //this updates the score
               console.log(currentScore);
               rightGhost.animate({
                     opacity: 0,
-                    top: "+=100",
-              }, 2000, function() {
-                    rightGhost.css({'right' : -100, 'top': (Math.random() *200), opacity: 1,})
+                    width: 0,
+              }, 1000, function() {
+                    rightGhost.css({'right' : -100, 'top': (Math.random() *200), opacity: 1, 'width': '10%'})
                     rightGhost.attr('src',"../project1/Images/Boo1.png");
                     moveRight = setInterval(floatRightGhost, 10);
                     rightGhostDie()
@@ -90,13 +93,13 @@ function topBooDie() {
               ghostImage.attr('src',"../project1/Images/Boo2.png");
               clearInterval(moveTheGhost);
               currentScore = currentScore + 1;
-              $("h1").text("Score: " + currentScore); //this updates the score
+              $("h1").html('Score: ' + '<span class ="red-text">' + currentScore + '</span>')
               console.log(currentScore);
               ghostImage.animate({
                     opacity: 0,
-                    top: "+=200",
-              }, 2000, function() {
-                    ghostImage.css({'left' : -100, 'top': (Math.random() *200), opacity: 1,})
+                    width: 0,
+              }, 1000, function() {
+                    ghostImage.css({'left' : -50, 'top': (Math.random() *200), opacity: 1, 'width': '10%'})
                     ghostImage.attr('src',"../project1/Images/Boo1flipped.png");
                     moveTheGhost = setInterval(floatGhost, 10);
                     ghostImageDie()
@@ -111,13 +114,13 @@ function lastGhostDie() {
               lastGhost.attr('src',"../project1/Images/Boo2.png");
               clearInterval(moveLastGhost);
               currentScore = currentScore + 1;
-              $("h1").text("Score: " + currentScore); //this updates the score
+              $("h1").html('Score: ' + '<span class ="red-text">' + currentScore + '</span>')
               console.log(currentScore);
               lastGhost.animate({
                     opacity: 0,
-                    top: "+=200",
-              }, 2000, function() {
-                    lastGhost.css({'left' : -100, 'top': (Math.random() *200), opacity: 1,})
+                    width: 0,
+              }, 1000, function() {
+                    lastGhost.css({'left' : -50, 'top': (Math.random() *200), opacity: 1, 'width': '10%'})
                     lastGhost.attr('src',"../project1/Images/Boo1flipped.png");
                     moveLastGhost = setInterval(floatLastGhost, 10);
                     lastGhostDie()
@@ -131,12 +134,12 @@ function ghostTwoDie() {
                 ghostImageTwo.attr('src',"../project1/Images/blackboo.gif");
                 clearInterval(moveGhostTwo);
                 currentScore = currentScore + 2;
-                $("h1").text("Score: " + currentScore); //this updates the score
+                $("h1").html('Score: ' + '<span class ="red-text">' + currentScore + '</span>')
                 console.log(currentScore);
                 ghostImageTwo.animate({
                   opacity: 0,
-                }, 2000, function() {
-                    ghostImageTwo.css({'right' : -400, 'top': (Math.random() *200), opacity: 1,})
+              }, 2000, function() {
+                    ghostImageTwo.css({'right' : -300, 'top': (Math.random() *200), opacity: 1, 'width': '10%'})
                     ghostImageTwo.attr('src',"../project1/Images/Boogif1.gif")
                     moveGhostTwo = setInterval(floatGhostTwo, 50 - (currentScore*2))
                     ghostTwoDie();
@@ -149,8 +152,8 @@ function yoshiHover() {
     console.log('mouseover')
     yoshiImage.attr('src', "../project1/Images/deadYoshi.gif")
     clearInterval(moveYoshi);
-    currentScore = currentScore - 1;
-    $("h1").text("Score: " + currentScore); //this updates the score
+    currentScore = currentScore - 3;
+    $("h1").html('Score: ' + '<span class ="red-text">' + currentScore + '</span>')
     yoshiImage.css("width", "10%");
     console.log(currentScore);
 
@@ -171,13 +174,15 @@ function kingBooKill (){
   kingBoo.one('click', function(){
     clearInterval(moveKing);
     kingScore = kingScore + 1;
+    kingSpecial()
+    console.log(kingScore)
     kingBoo.attr('src', "../project1/Images/ShyKing.gif");
     kingBoo.animate({
       opacity: 0,
     }, 2000, function(){
         kingBoo.attr('src', "../project1/Images/KingBoo1.gif")
         kingBoo.css({left: -200, opacity: 0})
-        var moveKing = setInterval(floatKing, 10000);
+        var moveKing = setInterval(floatKing, 20000);
         kingBooKill()         
         }
     );
@@ -256,6 +261,7 @@ function kingBooKill (){
       if (currentLeft > 550){
             ghostImage.css({'left' : -100, 'top': (Math.random() *200)});
             ghostsEscaped = ghostsEscaped + 1;
+            $("h2").text("Ghosts escaped: " + ghostsEscaped + "/10"); //this updates the ghosts escaped score
             console.log(ghostsEscaped)
               } 
           
@@ -290,6 +296,7 @@ function floatRightGhost(){
       if (currentRight> 550){
             rightGhost.css({'right' : -50, 'top': (Math.random() *200)});
             ghostsEscaped = ghostsEscaped + 1;
+            $("h2").text("Ghosts escaped: " + ghostsEscaped + "/10"); //this updates the ghosts escaped score
             console.log(ghostsEscaped);
               } 
           
@@ -324,6 +331,7 @@ function floatLastGhost(){
       if (currentLeft > 550){
             lastGhost.css({'left' : -100, 'top': (Math.random() *200)});
             ghostsEscaped = ghostsEscaped + 1;
+            $("h2").text("Ghosts escaped: " + ghostsEscaped + "/10"); //this updates the ghosts escaped score
             console.log(ghostsEscaped)
               } 
           
@@ -342,6 +350,7 @@ function floatLastGhost(){
       if (currentRight > 600){
             ghostImageTwo.css({'right' : -400, 'top': (Math.random() *300)})
             ghostsEscaped = ghostsEscaped + 1;
+            $("h2").text("Ghosts escaped: " + ghostsEscaped + "/10"); //this updates the ghosts escaped score
             console.log(ghostsEscaped);
               } 
     }
@@ -389,13 +398,18 @@ function floatTopBoo(){
     if (currentTop > 400){
       topBoo.css({'top' : -500, 'left': (Math.random() *300)})
       ghostsEscaped = ghostsEscaped + 1;
+      $("h2").text("Ghosts escaped: " + ghostsEscaped + "/10"); //this updates the ghosts escaped score
       console.log(ghostsEscaped);
     } 
   }
 }
 
-
-
+//if the king is clicked enough times:
+function kingSpecial(){
+  if (kingScore % 10 === 0){
+    console.log("Hello");
+  }
+}
  
 
 console.log(ghostsEscaped)

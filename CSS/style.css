@@ -2,7 +2,7 @@ body {
   display: block;
   background: black;
   margin-top: 20px;
-  max-height: 600px;
+  /*max-height: 600px;*/
 
 }
 
@@ -75,16 +75,35 @@ body {
 }
 
 .score {
-  display: inline-block;
-  margin-left: 900px;
+  /*display: inline-block;*/
+  margin: 0 auto;
+  width: 600px;
+  font-family: 'Creepster', cursive;
+  
 }
 
+.inline-block{
+  display: inline-block;
+}
 
+.score-text{
+  margin: 10px 20px 10px 0px;
+}
+
+.escape-text{
+  margin: 10px 20px 10px 0px; 
+}
+
+.red-text{
+  color: red;
+}
 
 h1 {
   color: white;
+  font-size: 30px;
 }
 
 h2 {
   color: white;
+  font-size: 30px;
 }
