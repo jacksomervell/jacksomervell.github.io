@@ -19,7 +19,7 @@ body {
 .ghost {
   position: absolute;
   width: 10%;
-  left: -50px;
+  left: -80px;
   right: 10px;
   top: 0px;
   bottom: 0px;
@@ -79,6 +79,7 @@ body {
   margin: 0 auto;
   width: 600px;
   font-family: 'Creepster', cursive;
+  display: none;
   
 }
 
@@ -96,6 +97,38 @@ body {
 
 .red-text{
   color: red;
+}
+
+.green-text{
+  color: green;
+}
+
+.startscreen{
+  background-image: url(../Images/BooBackground.png);
+  background-size: 110%;
+  margin: 0 auto;
+  width: 600px;
+  height: 400px;
+}
+
+
+.logo{
+  display: block;
+  width: 40%;
+  margin: 0 auto;
+  padding-right: 50px;
+  padding-top: 100px;
+}
+
+.start-button{
+  display: block;
+  margin: 0 auto;
+  padding-right: 50px;
+  background-color: black;
+  color: white;
+  border: 0px;
+  font-family: 'Creepster', cursive;
+  font-size: 30px;
 }
 
 h1 {
