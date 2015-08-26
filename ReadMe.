@@ -1,0 +1,57 @@
+ReadMe.
+
+Basic explanation: Help Luigi keep the ghosts under control in the mansion! 
+
+  Click on the ghosts to vacuum them up and stop them escaping the mansion (making it to the other side of the screen). If ten escape, it's game over!
+
+  Different ghost types behave differently - watch out for King Boo and remember to avoid getting in the way of Yoshi! 
+
+Functionality: Created functions for each individual ghost which determined their movement behaviour, their random spawning and score updating. 
+
+  The ghost from above only spawns after players get a certain score, and the accumulator ghost increaes in speed as the score increases. 
+
+  If Yoshi is hovered over, the players lose score. 
+
+  King Boo is clicked five times consecutively, the escaped ghost count is reset.
+
+  If enough ghosts escape, the Game over screen slides down, telling the player their score and asking whether they want to go again.   
+
+
+Unsolved problems/regrets:
+                  
+                  King Boo's click functionality is disabled for the presentation after issues
+
+                  Restart game function restarts the scores but doesn't reset the ghosts
+
+                  Couldn't get the mousedown animation function to work for Luigi cursor
+
+                  Spent too uch time worrying about little animation things rather than big picture, kept jumping form one thing to the next!
+
+                  How to Play link just goes through to the Luigi's Mansion Wikipeida page... also get that featur eon the homepage.
+
+Future features to add:
+
+                  High Score tracker
+
+                  Cursor mousedown Luigi
+
+                  2 player - 2nd player icon changes to Mario
+
+                  More ghosts on screen exponentially
+
+                  Possible hovering instead of clicking? More vacuum-like.
+
+                  Powerups - had a mushroom floating across which would have changed things to hover only for a short period of time?
+
+                  
+
+
+
+
+
+
+
+
+
+
+
