@@ -27,7 +27,7 @@ $(document).ready(function(){
     moveTheGhost = setInterval(floatGhost, 10);
     moveYoshi = setInterval(floatYoshi, 30);
     moveGhostTwo = setInterval(floatGhostTwo, 50);
-    moveKing = setInterval(floatKing, 30000);
+    moveKing = setInterval(floatKing, 20000);
     moveRight = setInterval(floatRightGhost, 10);
     moveLastGhost = setInterval(floatLastGhost, 10);
     moveTopBoo = setInterval(floatTopBoo, 20);
@@ -61,6 +61,14 @@ $(document).ready(function(){
     $(".start-button").css( 'cursor', 'url(../project1/Images/booTalk.gif), auto')
         $(".start-button").mousedown(function(event){
         event.preventDefault();})
+
+    $(".start-button").hover(function(){ 
+        $(".start-button").css({'color' : 'green'});
+      })
+
+    $(".play-again").hover(function(){ 
+        $(".play-again").css({'color' : 'red'});
+      })
           
 
   //starts the game when player clicks the button:
