@@ -18,6 +18,7 @@ Functionality: Created functions for each individual ghost which determined thei
 
 
 Unsolved problems/regrets:
+                  Pixels inconsistent style
                   
                   King Boo's click functionality is disabled for the presentation after issues
 
@@ -37,13 +38,17 @@ Future features to add:
 
                   2 player - 2nd player icon changes to Mario
 
-                  More ghosts on screen exponentially
+                  More ghosts on screen exponentially - ghostFactory?
 
                   Possible hovering instead of clicking? More vacuum-like.
 
                   Powerups - had a mushroom floating across which would have changed things to hover only for a short period of time?
 
-                  
+                  spooky music and ghost sounds
+
+
+
+
 
 
 
