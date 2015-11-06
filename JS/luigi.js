@@ -33,7 +33,7 @@ $(document).ready(function(){
     moveTopBoo = setInterval(floatTopBoo, 20);
 
 //this sets the cursor to Luigi while the game is playing and prevents it from changing
-    $('#container').css( 'cursor', 'url(../project1/Images/LuigiFlip.png), auto');
+    $('#container').css( 'cursor', 'url(Images/LuigiFlip.png), auto');
 
     $("#container").mousedown(function(event){
     event.preventDefault();})
@@ -41,24 +41,24 @@ $(document).ready(function(){
 
 //this sets the cursor to a glove on the start and game over screens, and a ghost when hovering over the play and estart buttons:
 
-    $("body").css('cursor', 'url(../project1/Images/cursorglove.png), auto')
+    $("body").css('cursor', 'url(Images/cursorglove.png), auto')
         $("body").mousedown(function(event){
         event.preventDefault();})
 
-    $(".startscreen").css('cursor', 'url(../project1/Images/cursorglove.png), auto')
+    $(".startscreen").css('cursor', 'url(Images/cursorglove.png), auto')
         $(".startscreen").mousedown(function(event){
         event.preventDefault();})
 
-    $(".game-over").css('cursor', 'url(../project1/Images/cursorglove.png), auto')
+    $(".game-over").css('cursor', 'url(Images/cursorglove.png), auto')
         $(".game-over").mousedown(function(event){
         event.preventDefault();})
 
-    $(".play-again").css( 'cursor', 'url(../project1/Images/booTalk.gif), auto')
+    $(".play-again").css( 'cursor', 'url(Images/booTalk.gif), auto')
         $(".play-again").mousedown(function(event){
         event.preventDefault();})
 
 
-    $(".start-button").css( 'cursor', 'url(../project1/Images/booTalk.gif), auto')
+    $(".start-button").css( 'cursor', 'url(Images/booTalk.gif), auto')
         $(".start-button").mousedown(function(event){
         event.preventDefault();})
 
@@ -149,7 +149,7 @@ function gameOver(){
     //this one animates the ghost from the right to die:
 function rightGhostDie() {
   rightGhost.one('click', function(){
-    rightGhost.attr('src',"../project1/Images/Boo2.png");
+    rightGhost.attr('src',"Images/Boo2.png");
     clearInterval(moveRight);
     currentScore = currentScore + 1;
     $("h1").html('Score: ' + '<span class ="red-text">' + currentScore + '</span>'); //this updates the score
@@ -159,7 +159,7 @@ function rightGhostDie() {
       width: 0,
     }, 1000, function() {
         rightGhost.css({'right' : -100, 'top': (Math.random() *200), opacity: 1, 'width': '10%'})
-        rightGhost.attr('src',"../project1/Images/Boo1.png");
+        rightGhost.attr('src',"Images/Boo1.png");
         moveRight = setInterval(floatRightGhost, 10);
         rightGhostDie()
       });
@@ -169,7 +169,7 @@ function rightGhostDie() {
     //this one animated the ghost form the left to die:
 function ghostImageDie() {
   ghostImage.one('click', function(){
-    ghostImage.attr('src',"../project1/Images/Boo2.png");
+    ghostImage.attr('src',"Images/Boo2.png");
     clearInterval(moveTheGhost);
     currentScore = currentScore + 1;
     $("h1").html('Score: ' + '<span class ="red-text">' + currentScore + '</span>')
@@ -179,7 +179,7 @@ function ghostImageDie() {
       width: 0,
     }, 1000, function() {
         ghostImage.css({'left' : -50, 'top': (Math.random() *200), opacity: 1, 'width': '10%'})
-        ghostImage.attr('src',"../project1/Images/Boo1flipped.png");
+        ghostImage.attr('src',"Images/Boo1flipped.png");
         moveTheGhost = setInterval(floatGhost, 10);
         ghostImageDie()
     });
@@ -189,7 +189,7 @@ function ghostImageDie() {
   //this one animates the top-left ghost to die:
 function lastGhostDie() {
   lastGhost.one('click', function(){
-    lastGhost.attr('src',"../project1/Images/Boo2.png");
+    lastGhost.attr('src',"Images/Boo2.png");
     clearInterval(moveLastGhost);
     currentScore = currentScore + 1;
     $("h1").html('Score: ' + '<span class ="red-text">' + currentScore + '</span>')
@@ -199,7 +199,7 @@ function lastGhostDie() {
       width: 0,
       }, 1000, function() {
         lastGhost.css({'left' : -50, 'top': (Math.random() *200), opacity: 1, 'width': '10%'})
-        lastGhost.attr('src',"../project1/Images/Boo1flipped.png");
+        lastGhost.attr('src',"Images/Boo1flipped.png");
         moveLastGhost = setInterval(floatLastGhost, 10);
         lastGhostDie()
     });         
@@ -208,7 +208,7 @@ function lastGhostDie() {
   //cumulating ghost to die:
 function ghostTwoDie() {
   ghostImageTwo.one('click', function(){
-    ghostImageTwo.attr('src',"../project1/Images/blackboo.gif");
+    ghostImageTwo.attr('src',"Images/blackboo.gif");
     clearInterval(moveGhostTwo);
     currentScore = currentScore + 2;
     $("h1").html('Score: ' + '<span class ="red-text">' + currentScore + '</span>')
@@ -217,7 +217,7 @@ function ghostTwoDie() {
       opacity: 0,
       }, 2000, function() {
         ghostImageTwo.css({'right' : -300, 'top': (Math.random() *200), opacity: 1, 'width': '10%'})
-        ghostImageTwo.attr('src',"../project1/Images/Boogif1.gif")
+        ghostImageTwo.attr('src',"Images/Boogif1.gif")
         moveGhostTwo = setInterval(floatGhostTwo, 50 - (currentScore*2))
         ghostTwoDie();
       }); 
@@ -227,7 +227,7 @@ function ghostTwoDie() {
 function yoshiHover() {
    yoshiImage.one('mouseover', function(){
       console.log('mouseover')
-      yoshiImage.attr('src', "../project1/Images/deadYoshi.gif")
+      yoshiImage.attr('src', "Images/deadYoshi.gif")
       clearInterval(moveYoshi);
       currentScore = currentScore - 3;
       $("h1").html('Score: ' + '<span class ="red-text">' + currentScore + '</span>')
@@ -238,7 +238,7 @@ function yoshiHover() {
         opacity: 0,
         }, 3000, function() {
           yoshiImage.css({right: -200, 'top' : (Math.random() *200), opacity: 1})
-          yoshiImage.attr('src', "../project1/Images/Yoshi_fly.gif")
+          yoshiImage.attr('src', "Images/Yoshi_fly.gif")
           yoshiImage.css("width", "20%");
           moveYoshi = setInterval(floatYoshi, 30);
           yoshiHover();
